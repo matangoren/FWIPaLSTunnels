@@ -1,0 +1,4 @@
+name = "FWIPaLSTunnels"
+uuid = "ca68966d-f042-490c-b784-ca6d7ad2aedf"
+authors = ["matan <matantheman@gmail.com>"]
+version = "0.1.0"
