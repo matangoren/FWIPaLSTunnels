@@ -18,12 +18,12 @@ function generateData(n, m; linear=false)
         level_info = []
         for i=1:num_levels
             s = rand(1:3)
-            t = rand(s+4:7)
+            t = rand(s+3:7)
             start_index = 1 + s*h1 - rand(0:4:16);
             end_index = t*h1 + rand(0:4:16);
 
             if i == 1
-                d = rand(2:3);
+                d = rand(1:2);
                 model[1 + s*h1: 1 + s*h1 + 8, 1:d*h2] .= 10.0;
                 model[t*h1-8:t*h1, 1:d*h2] .= 10.0;
             else
@@ -44,8 +44,8 @@ function generateData(n, m; linear=false)
             append!(level_info, [(start_index, end_index, d)])
 
             model[start_index:end_index, d*h2-16:d*h2] .= 10.0;
-            model[start_index:start_index+h1, d*h2-16-rand(0:4:12):d*h2 + rand(0:4:12)] .= 10;
-            model[end_index-h1:end_index, d*h2-16-rand(0:4:12):d*h2 + rand(0:4:12)] .= 10;            
+            model[start_index:start_index+h1, d*h2-rand(16:2:24):d*h2 + rand(0:4:8)] .= 10;
+            model[end_index-h1:end_index, d*h2-rand(16:2:24):d*h2 + rand(0:4:8)] .= 10;            
         end
 
 
