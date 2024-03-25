@@ -12,9 +12,9 @@ function generateData(n, m; linear=false)
         end
 
         h1 = Int64(floor(n[1] / 8))
-        h2 = Int64(floor(n[2] / 8))
+        h2 = Int64(floor(n[2] / 16))
 
-        num_levels = rand(1:2)
+        num_levels = rand(2:2)
         level_info = []
         for i=1:num_levels
             s = rand(1:3)
@@ -23,12 +23,12 @@ function generateData(n, m; linear=false)
             end_index = t*h1 + rand(0:4:16);
 
             if i == 1
-                d = rand(1:2);
+                d = rand(3:4);
                 model[1 + s*h1: 1 + s*h1 + 8, 1:d*h2] .= 10.0;
                 model[t*h1-8:t*h1, 1:d*h2] .= 10.0;
             else
                 prev_start, prev_end, prev_d = level_info[end];
-                d = prev_d + 1 + rand(0:1);
+                d = prev_d + 3 + rand(0:1);
                 if prev_end >= s*h1 >= prev_start
                     model[1 + s*h1: 1 + s*h1 + 8, prev_d*h2+1:d*h2] .= 10.0;
                 else
@@ -44,8 +44,8 @@ function generateData(n, m; linear=false)
             append!(level_info, [(start_index, end_index, d)])
 
             model[start_index:end_index, d*h2-16:d*h2] .= 10.0;
-            model[start_index:start_index+h1, d*h2-rand(16:2:24):d*h2 + rand(0:4:8)] .= 10;
-            model[end_index-h1:end_index, d*h2-rand(16:2:24):d*h2 + rand(0:4:8)] .= 10;            
+            model[start_index:start_index+h1, d*h2-rand(16:2:24):d*h2 + rand(0:2:12)] .= 10;
+            model[end_index-h1:end_index, d*h2-rand(16:4:24):d*h2 + rand(0:2:12)] .= 10;            
         end
 
 
